@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue Events Example</title>
+  <!-- development version, includes helpful console warnings -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+  <div id="app1">
+      <div v-bind:class="{ active: isActive }">Simple Example</div>
+      <div
+        class="static"
+        v-bind:class="{ active: isActive, 'text-danger': hasError }"
+      >Simple Multi-class example</div>
+      <div v-bind:class="classObject">Class Object Example</div>
+      <div v-bind:class="classObjectComputed">Computed Class Object Example</div>
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app1',
+      data: {
+        isActive: true,
+        hasError: false,
+        classObject: {
+          active: true,
+          'text-danger': false
+        }
+      },
+      computed: {
+        classObjectComputed: function () {
+          return {
+            active: this.isActive && !this.error,
+            'text-danger': this.error && this.error.type === 'fatal'
+          }
+        }
+      }
+    })
+  </script>
+
+</body>
+</html>
