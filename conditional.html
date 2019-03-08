@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Vue Conditionals</title>
+  <!-- development version, includes helpful console warnings -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="app">
+    Using v-if...<br>
+
+    <h1 v-if="show1">show1 is set</h1>
+    <h1 v-else>show1 is not set</h1>
+    <h1 v-if="show2">show2 is set</h1>
+    <h1 v-else>show2 is not set</h1>
+
+    <template v-if="showBlock">
+      <h1>Block...</h1>
+      <p>fred</p>
+      <p>bob</p>
+      <p>larry</p>
+      <p>...end of BLOCK</p>
+    </template>
+    <p v-else>NOT SHOWING BLOCK</p>
+
+    <div>
+      This will remember the value when toggling...<br>
+      <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username">
+      </template>
+      <template v-else-if="loginType === 'email'">
+        <label>Email</label>
+        <input placeholder="Enter your email address">
+      </template>
+      <br><input type="button" value="Toggle login type" v-on:click="toggleLoginType">
+    </div>
+    <div>
+      Whereas, this uses keys to avoid remembering the value when toggling...<br>
+      <template v-if="loginType === 'username'">
+        <label>Username</label>
+        <input placeholder="Enter your username" key="username-input">
+      </template>
+      <template v-else-if="loginType === 'email'">
+        <label>Email</label>
+        <input placeholder="Enter your email address" key="email-input">
+      </template>
+      <br><input type="button" value="Toggle login type" v-on:click="toggleLoginType">
+    </div>
+
+    <div>
+      Using v-show...<br>
+      <p v-show="show3">show3 is set</p>
+      <p v-show="show4">show4 is set</p>
+    </div>
+
+  </div>
+
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        show1: true,
+        show2: false,
+        showBlock: false,
+        loginType: "username",
+        show3: true,
+        show4: false
+      },
+      methods: {
+        toggleLoginType: function () {
+          if (this.loginType === "username") {
+            this.loginType = "email"
+          }
+          else {
+            this.loginType = "username"
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>
